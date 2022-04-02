@@ -9,16 +9,26 @@ public class Prompt {
         System.out.println("|h. 도움말 q. 종료");
         System.out.println("+--------------------------+");
     }
+
     public int parseDay(String week) {
-        if (week.equals("su")) return 0;
-        else if(week.equals("mo")) return 1;
-        else if(week.equals("tu")) return 2;
-        else if(week.equals("we")) return 3;
-        else if(week.equals("th")) return 4;
-        else if(week.equals("fr")) return 5;
-        else if(week.equals("sa")) return 6;
-        else
-            return 0;
+        switch(week) {
+            case "su":
+                return 0;
+            case "mo":
+                return 1;
+            case "tu":
+                return 2;
+            case "we":
+                return 3;
+            case "th":
+                return 4;
+            case "fr":
+                return 5;
+            case "sa":
+                return 6;
+            default:
+                return 0;
+        }
     }
 
     public void runPrompt() throws ParseException {
@@ -26,16 +36,27 @@ public class Prompt {
         Scanner scanner = new Scanner(System.in);
         Calendar cal = new Calendar();
 
-        while (true) {
+        boolean isLoop = true;
+        while (isLoop) {
             System.out.println("명령(1,2,3,h,q)");
             String cmd = scanner.next();
-            if (cmd.equals("1")) cmdRegister(scanner, cal);
-            else if (cmd.equals("2")) cmdSearch(scanner, cal);
-            else if (cmd.equals("3")) cmdCal(scanner, cal);
-            else if (cmd.equals("h")) printMenu();
-            else if (cmd.equals("q")) break;
+            switch (cmd) {
+                case "1":
+                    cmdRegister(scanner, cal);
+                    break;
+                case "2":
+                    cmdSearch(scanner, cal);
+                    break;
+                case "3":
+                    cmdCal(scanner, cal);
+                    break;
+                case "h":
+                    printMenu();
+                    break;
+                case "q":
+                    isLoop = false;
+            }
         }
-
         System.out.println("Thank you. Bye~");
         scanner.close();
     }
